@@ -1,26 +1,372 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* ─────────────────────────────────────────────
+     Tree Escape — Brand Colors
+     ───────────────────────────────────────────── */
+
+  --color-ink: #141f18;
+  --color-ink-soft: #28372d;
+
+  --color-moss: #284433;
+  --color-moss-light: #3d5e4a;
+
+  --color-sage: #8f9f83;
+  --color-sage-wash: #eef2eb;
+
+  --color-cream: #fbf9f4;
+  --color-cream-alt: #f3eee3;
+
+  --color-sand: #e8e1d3;
+  --color-border: #dfd7c8;
+
+  --color-clay: #b55a3f;
+  --color-clay-hover: #9c4930;
+
+  --color-amber: #c5863c;
+  --color-gold: #d49b38;
+
+  --color-white: #ffffff;
+
+  /* ─────────────────────────────────────────────
+     Typography
+     ───────────────────────────────────────────── */
+
+  --font-display: var(--font-playfair);
+  --font-body: var(--font-dm-sans);
+  --font-mono: var(--font-dm-mono);
+
+  /* ─────────────────────────────────────────────
+     Spacing
+     4px base scale
+     ───────────────────────────────────────────── */
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  /* ─────────────────────────────────────────────
+     Radius
+     Existing Tree Escape values preserved
+     ───────────────────────────────────────────── */
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+
+  /* ─────────────────────────────────────────────
+     Shadows
+     Existing Tree Escape values preserved
+     ───────────────────────────────────────────── */
+
+  --shadow-sm: 0 2px 8px rgb(20 31 24 / 5%);
+  --shadow-md: 0 10px 30px rgb(20 31 24 / 8%);
+  --shadow-lg: 0 20px 50px rgb(20 31 24 / 12%);
+
+  /* ─────────────────────────────────────────────
+     Motion
+     ───────────────────────────────────────────── */
+
+  --ease-tree: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
+
+  /* ─────────────────────────────────────────────
+     Layout
+     ───────────────────────────────────────────── */
+
+  --content-max: 1440px;
+  --content-readable: 720px;
+
+  --gutter-mobile: 1.25rem;
+  --gutter-tablet: 2rem;
+  --gutter-desktop: 4%;
+
+  /* ─────────────────────────────────────────────
+     Semantic surface/text tokens
+     ───────────────────────────────────────────── */
+
+  --background: var(--color-cream);
+  --foreground: var(--color-ink);
+
+  --surface: var(--color-white);
+  --surface-muted: var(--color-cream-alt);
+  --surface-subtle: var(--color-sage-wash);
+
+  --text-primary: var(--color-ink);
+  --text-secondary: var(--color-ink-soft);
+  --text-muted: var(--color-sage);
+
+  --accent: var(--color-moss);
+  --accent-hover: var(--color-moss-light);
+
+  --action-primary: var(--color-ink);
+  --action-primary-foreground: var(--color-cream);
+
+  --action-secondary: var(--color-cream);
+  --action-secondary-foreground: var(--color-ink);
+
+  --focus-ring: var(--color-moss);
 }
 
+/* stylelint-disable-next-line at-rule-no-unknown -- Tailwind CSS v4 theme directive */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-ink: var(--color-ink);
+  --color-ink-soft: var(--color-ink-soft);
+
+  --color-moss: var(--color-moss);
+  --color-moss-light: var(--color-moss-light);
+
+  --color-sage: var(--color-sage);
+  --color-sage-wash: var(--color-sage-wash);
+
+  --color-cream: var(--color-cream);
+  --color-cream-alt: var(--color-cream-alt);
+
+  --color-sand: var(--color-sand);
+  --color-border: var(--color-border);
+
+  --color-clay: var(--color-clay);
+  --color-clay-hover: var(--color-clay-hover);
+
+  --color-amber: var(--color-amber);
+  --color-gold: var(--color-gold);
+
+  --color-white: var(--color-white);
+
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ─────────────────────────────────────────────
+   Reset
+   ───────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  scroll-behavior: smooth;
+  background: var(--background);
+  font-size: 16px;
 }
 
 body {
+  min-height: 100vh;
+  margin: 0;
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: var(--color-moss);
+  color: var(--color-cream);
+}
+
+/* ─────────────────────────────────────────────
+   Accessibility
+   ───────────────────────────────────────────── */
+
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   Typography System
+   ───────────────────────────────────────────── */
+
+.type-display {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 7vw, 6.5rem);
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+}
+
+.type-h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.type-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.5vw, 3.5rem);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+}
+
+.type-h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.type-body-lg {
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  line-height: 1.65;
+}
+
+.type-body {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.type-body-sm {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+.type-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.type-meta {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1.4;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.type-nav {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.type-button {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.type-price {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+
+.type-measurement {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+}
+
+/* ─────────────────────────────────────────────
+   Responsive container helpers
+   ───────────────────────────────────────────── */
+
+.tree-container {
+  width: min(
+    calc(100% - (var(--gutter-mobile) * 2)),
+    var(--content-max)
+  );
+  margin-inline: auto;
+}
+
+@media (min-width: 768px) {
+  .tree-container {
+    width: min(
+      calc(100% - (var(--gutter-tablet) * 2)),
+      var(--content-max)
+    );
+  }
+}
+
+@media (min-width: 1024px) {
+  .tree-container {
+    width: min(
+      calc(100% - (var(--gutter-desktop) * 2)),
+      var(--content-max)
+    );
+  }
 }
